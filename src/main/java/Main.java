@@ -8,5 +8,6 @@ public class Main {
     public static void main(String[] args) throws ClientException, ApiException, IOException, URISyntaxException {
         VkUtils.downloadPhotos();
        // FileUtil.findInContent();
+        System.out.println("ASD");
     }
 }
