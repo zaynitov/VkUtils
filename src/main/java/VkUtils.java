@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 public class VkUtils {
-    private static String code = "01a531b55d4fe9f925";
+    private static String code = "3a518f2ea0acb87780";
     private static Long add = 1L;
 
     public static void downloadPhotos() throws ClientException, ApiException, IOException {
@@ -43,10 +43,11 @@ public class VkUtils {
         UserActor actor = new UserActor(authResponse.getUserId(), authResponse.getAccessToken());
         GetAlbumsResponse photosGetQuery = vk.photos().getAlbums(actor).ownerId(ownerHaratsGroup).execute();
         List<String> albumIds = photosGetQuery.getItems().stream().map(PhotoAlbumFull::getId).map(Object::toString).collect(Collectors.toList());
-        log.debug("{} albums in group", albumIds.size());
+        System.out.println("{} albums in group"+ albumIds.size());
         for (int i = 0; i < albumIds.size(); i++) {
-            log.debug("{} albumId is processing", i);
-            GetResponse execute = vk.photos().get(actor).ownerId(ownerHaratsGroup).albumId(albumIds.get(0)).execute();
+            if (i<100) continue;
+            System.out.println("{} albums in process"+ i);
+            GetResponse execute = vk.photos().get(actor).ownerId(ownerHaratsGroup).albumId(albumIds.get(i)).execute();
             List<Photo> items = execute.getItems();
             for (Photo item : items) {
                 String maxPhotoUrl = getMaxPhoto(item);
@@ -55,6 +56,7 @@ public class VkUtils {
                 File file = new File("D:\\photos\\" + add++ + ".jpg");
                 ImageIO.write(img, "jpg", file);
             }
+            if (i>300) break;
         }
     }
 
