@@ -18,4 +18,5 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.10'
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
     compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.25'
+    compile group: 'org.freemarker', name: 'freemarker', version: '2.3.20'
 }
